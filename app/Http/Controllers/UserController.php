@@ -36,9 +36,12 @@ class UserController extends Controller
         // UserModel::create($data);
 
          //JS 4 Praktikum 2.1 - Retrieving Single Models
-         $user = UserModel::findOr(20, ['username','nama'],function (){
-            abort(404);
-         }); //->first()
+        //  $user = UserModel::findOr(20, ['username','nama'],function (){
+        //     abort(404);
+        //  }); //->first()
+
+        //JS 4 Praktikum 2.2 - Not Found Exceptions
+        $user = UserModel::where('username','manager9')->firstOrFail();
          return view('user',['data' => $user]);
 
         //coba akses model UserModel
