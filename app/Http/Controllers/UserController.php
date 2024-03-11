@@ -41,7 +41,8 @@ class UserController extends Controller
         //  }); //->first()
 
         //JS 4 Praktikum 2.2 - Not Found Exceptions
-        $user = UserModel::where('username','manager9')->firstOrFail();
+        $user = UserModel::where('level_id',2)->count();
+        // dd($user);
          return view('user',['data' => $user]);
 
         //coba akses model UserModel
