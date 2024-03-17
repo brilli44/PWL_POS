@@ -1,20 +1,25 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('subtitle', 'Kategori')
 @section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Kategori')
+@section('content_header_subtitle', 'kategori')
 
 @section('content')
-<div class="container">
-    <div class="card">
-        <div class="card-header">Manage Kategori</div>
-        <div class="card-body">
-            {{$dataTable->table()}}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">Manage Kategori</div>
+            <div class="card-body">
+                {{ $dataTable->table() }}
+            </div>
         </div>
     </div>
-</div>
+
+
+
+<!-- Tambahkan tombol edit dan delete di sini jika diperlukan -->
+
 @endsection
 
-@push('script')
-{{$dataTable->scripts()}}
+@push('scripts')
+    {{ $dataTable->scripts() }}
 @endpush
