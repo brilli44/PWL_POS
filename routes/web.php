@@ -31,6 +31,8 @@ Route::get('/user/ubah/{id}',[UserController::class,'ubah'])->name('/user/ubah')
 Route::get('/user/hapus/{id}',[UserController::class,'hapus'])->name('/user/hapus');
 Route::post('/user/tambah_simpan/{id}',[UserController::class,'tambah_simpan'])->name('/user/tambah_simpan');
 Route::get('/kategori', [KategoriController::class,'index']);
-Route::get('/kategori/create',[KategoriController::class,'create']);
+//<!-- Jobheet 5 tugas praktikum 1 ,Tambahkan button Add di halam manage kategori, yang mengarah ke create kategori
+//baru -->
+Route::get('/kategori/create',[KategoriController::class,'create'])->name('create');
 Route::post('/kategori', [KategoriController::class,'store']);
 

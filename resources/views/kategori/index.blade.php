@@ -13,10 +13,11 @@
             </div>
         </div>
     </div>
+<!-- Jobheet 5 tugas praktikum 1 ,Tambahkan button Add di halam manage kategori, yang mengarah ke create kategori
+baru -->
+<a href="{{ route('create') }}" class="btn btn-primary"> Add</a>
 
 
-
-<!-- Tambahkan tombol edit dan delete di sini jika diperlukan -->
 
 @endsection
 
