@@ -41,3 +41,5 @@ Route::post('/kategori', [KategoriController::class,'store']);
 Route::get('/kategori/edit/{id}',[KategoriController::class,'edit'])->name('kategori.edit');
 Route::put('/kategori/edit_simpan/{id}',[KategoriController::class,'edit_simpan'])->name('kategori.edit_simpan');
 
+//<!-- Jobheet 5 tugas praktikum 4 ,Tambahkan action delete di datatables serta controllernya -->
+Route::get('/kategori/hapus/{id}',[KategoriController::class,'hapus'])->name('kategori.hapus');

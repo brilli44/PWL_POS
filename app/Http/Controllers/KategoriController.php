@@ -57,4 +57,11 @@ class KategoriController extends Controller
   $kategori->save();
   return redirect('/kategori');
  }
+
+ //<!-- Jobheet 5 tugas praktikum 4
+ public function hapus($id){
+  $kategori = KategoriModel::find($id);
+  $kategori->delete();
+  return redirect('/kategori');
+ }
 }

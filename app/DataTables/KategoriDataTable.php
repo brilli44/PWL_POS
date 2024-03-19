@@ -21,10 +21,15 @@ class KategoriDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        //Jobsheet 5 Tugas Praktikum 3
         return (new EloquentDataTable($query))
             ->addColumn('action',function($kategori){
-                return '<a href="'. route('edit', $kategori['kategori_id']). '"class="btn btn-primary btn-sm">Edit</a>';
+                return '<a href="'. route('kategori.edit', $kategori['kategori_id']). '"class="btn btn-sm btn-primary">Edit</a>
+                <a href="'. route('kategori.hapus', $kategori['kategori_id']). '"class="btn btn-sm btn-danger">Delete</a>';
+                
+                
             } )
+            ->rawColumns(['action'])
             ->setRowId('id');
     }
     /**
@@ -71,10 +76,11 @@ class KategoriDataTable extends DataTable
             Column::make('kategori_nama'),
             Column::make('created_at'),
             Column::make('updated_at'),
+            //Jobsheet 5 Tugas Praktikum 3
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            ->width(60)
+           
             ->addClass('text-center'),
         ];
     }
