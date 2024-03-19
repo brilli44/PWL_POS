@@ -1,7 +1,8 @@
 <?php
 
 return [
-
+//Jobsheet 5 Tugas Praktikum 2
+    'manage_kategori' => 'MANAGE KATEGORI',
     'main_navigation' => 'MAIN NAVIGATION',
     'blog' => 'Blog',
     'pages' => 'Pages',

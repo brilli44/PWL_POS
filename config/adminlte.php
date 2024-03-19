@@ -322,11 +322,12 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        //Jobsheet 5 Tugas Praktikum 2
+        ['header' => 'manage_kategori'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Manage Kategori',
+            'url' => 'kategori',
+            'icon' => 'fas fa-fw fa-list',
         ],
         [
             'text' => 'change_password',
