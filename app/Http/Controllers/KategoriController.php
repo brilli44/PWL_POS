@@ -30,7 +30,7 @@ class KategoriController extends Controller
    return $dataTable->render('kategori.index');
  }
 
- //jobsheet 5 praktikum 3 --------
+ //jobsheet 5 tugas praktikum 1 --------
 
  public function create(){
    return view('kategori.create');
@@ -42,5 +42,19 @@ class KategoriController extends Controller
       'kategori_nama'=> $request->namaKategori,
    ]);
    return redirect('/kategori');
+ }
+
+ //jobsheet 5 tugas praktikum 3 --------
+ public function edit($id){
+  $kategori = KategoriModel::findOrFail($id);
+  return view('kategori.edit',compact('kategori'));
+ }
+
+ public function edit_simpan(Request $request,$id){
+  $kategori = KategoriModel::find($id);
+  $kategori->kategori_kode = $request->kodeKategori;
+  $kategori->kategori_nama = $request->namaKategori;
+  $kategori->save();
+  return redirect('/kategori');
  }
 }
