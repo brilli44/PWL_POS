@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LevelModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,5 +21,29 @@ class LevelController extends Controller
 
 $data = DB::select('select * from m_level');
 return view('level',['data' => $data]);
+}
+public function create()
+{
+    return view('level_tambah');
+}
+
+public function store(Request $request)
+{
+    return 0;
+}
+
+public function edit($id)
+{
+    return 0;
+}
+
+public function update(Request $request, $id)
+{
+    return 0;
+}
+
+public function delete($id)
+{
+    return 0;
 }
 }
