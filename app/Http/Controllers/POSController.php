@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\m_level;
 use App\Models\m_user;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class POSController extends Controller
      */
     public function create()
     {
-        return view('m_user.create');
+        $level = m_level::all();
+        return view('m_user.create', ['levels' => $level]);
     }
 
     /**
@@ -43,7 +45,7 @@ class POSController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id,m_user $useri)
+    public function show(string $id, m_user $useri)
     {
         $useri = m_user::findOrFail($id);
         return view('m_user.show', compact('useri'));

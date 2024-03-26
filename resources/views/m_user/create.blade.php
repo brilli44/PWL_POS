@@ -41,6 +41,16 @@
                 <input type="password" name="password" class="form-control" placeholder="Masukkan password"></input>
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <label for="level">Level</label>
+                <select class="form-control" name="level_id" id="level">
+                    @foreach ($levels as $level)
+                        <option value="{{$level->level_id}}">{{$level->level_nama}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

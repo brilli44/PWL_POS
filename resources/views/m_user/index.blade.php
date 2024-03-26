@@ -1,8 +1,10 @@
-@extends('m_user/template') @section('content')
+@extends('layouts.app')
+
+@section('content')
     <div class="row mt-5 mb-5">
         <div class="col-lg-12 margin-tb">
             <div class="float-left">
-                <h2>CRUD user</h2>
+                <h2>CRUD User</h2>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('m_user.create') }}"> Input User</a>
@@ -14,24 +16,21 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="background-color: #FFFACD; /* Kuning Muda */">
         <tr>
             <th width="20px" class="text-center">User id</th>
             <th width="150px" class="text-center">Level id</th>
-            <th width="200px"class="text-center">username</th>
-            <th width="200px"class="text-center">nama</th>
-            <th width="150px"class="text-center">password</th>
+            <th width="200px" class="text-center">username</th>
+            <th width="200px" class="text-center">nama</th>
+            <th width="150px" class="text-center">password</th>
         </tr>
         @foreach ($useri as $m_user)
             <tr>
-
                 <td>{{ $m_user->user_id }}</td>
                 <td>{{ $m_user->level_id }}</td>
                 <td>{{ $m_user->username }}</td>
                 <td>{{ $m_user->nama }}</td>
                 <td>{{ $m_user->password }}</td>
-
-
                 <td class="text-center">
                     <form action="{{ route('m_user.destroy', $m_user->user_id) }}" method="POST">
                         <a class="btn btn-info btn-sm" href="{{ route('m_user.show', $m_user->user_id) }}">Show</a>
