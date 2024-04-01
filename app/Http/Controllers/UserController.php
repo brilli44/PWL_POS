@@ -146,12 +146,15 @@ class UserController extends Controller
         // Menampilkan halaman awal user 
     public function index(){
         $breadcrumb = (object) 
-        [ 'title' => 'Daftar User', 'list' => ['Home', 'User'] ];
+        [ 'title' => 'Daftar User', 
+        'list' => ['Home', 'User'] ];
         
         $page = (object) [ 'title' => 'Daftar user yang terdaftar dalam sistem'
     ];
         $activeMenu = 'user'; // set menu yang sedang aktif
-        return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        // josbheet 7 praktikum 4 bagian 1
+        $level = LevelModel::all(); // ambil data level untuk filter level
+        return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level ,'activeMenu' => $activeMenu]);
     }
 
     // Jobsheet 7 Praktikum 3 bagian 7
@@ -159,6 +162,13 @@ class UserController extends Controller
     public function list(Request $request) {
     $users = UserModel::select('user_id', 'username', 'nama', 'level_id')
         ->with('level');
+
+    //Filter data user berdasarkan level_id
+    //jobsheet 7 praktikum 4 bagian 5
+    if ($request->level_id){
+        $users->where('level)id', $request->level_id);
+    }
+    
     return DataTables::of($users)
         ->addIndexColumn() // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
         ->addColumn('aksi', function ($user) { // menambahkan kolom aksi
