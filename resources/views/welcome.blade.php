@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+{{-- @extends('adminlte::page')
 @section('title', 'Dashboard')
 @section('content_header')
 <h1>Dashboard</h1>
@@ -165,12 +165,27 @@
 <div>
 </div>
 <button type = "submit" class ="btn btn-info">Submit </button> --}}
-</div>
+{{-- </div>
 @stop
 @section('css')
-{{-- Add here extra stylesheets --}}
-{{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+Add here extra stylesheets
+<link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 @section('js')
 <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-@stop
+@stop --}}
+
+{{-- Jobsheet 7 praktikum 2 bagian 2 --}}
+@extends('layouts.template')
+
+@section('content')
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Halo Apa Kabar</h3>
+        <div class="card-tools"></div>
+    </div>
+    <div class="card-body">
+        Selamat Datang semua, ini adalah halaman utama apliaksi ini
+    </div>
+</div>
+@endsection
