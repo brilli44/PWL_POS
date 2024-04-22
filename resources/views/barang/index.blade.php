@@ -1,44 +1,45 @@
-
 @extends('layouts.template')
-
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create') }}">Tambah</a>
+                <a class="btn btn-sm btn-primary mt-1" href="{{ url('barang/create') }}">Tambah</a>
             </div>
         </div>
         <div class="card-body">
-            @if (@session('success'))
+            @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
             @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
+                <div class="alert alert-success">{{ session('error') }}</div>
             @endif
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
-                            <select class="form-control" id="level_id" name="level_id" required>
+                            <select class="form-control" id="barang_id" name="barang_id" required>
                                 <option value="">- Semua -</option>
-                                @foreach ($kategori as $item)
-                                    <option value="{{ $item->kategori_id }}">{{ $item->kategori_id }}</option>
+                                @foreach ($barang as $item)
+                                    <option value="{{ $item->barang_id }}">{{ $item->barang_kode }}</option>
                                 @endforeach
                             </select>
-                            <small class="form-text text-muted">Kategori Barang</small>
+                            <small class="form-text text-muted">Data Barang</small>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_user">
+
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_barang">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Username</th>
-                        <th>Nama</th>
-                        <th>Level Pengguna</th>
+                        <th>Kategori Nama</th>
+                        <th>Barang Kode</th>
+                        <th>Barang Nama</th>
+                        <th>Harga Beli</th>
+                        <th>Harga Jual</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -51,15 +52,14 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            var dataUser = $('#table_user').DataTable({
+            var dataBarang = $('#table_barang').DataTable({
                 serverSide: true, // serverSide: true, jika ingin menggunakan server side processing
                 ajax: {
-                    "url": "{{ url('user/list') }}",
+                    "url": "{{ url('barang/list') }}",
                     "dataType": "json",
                     "type": "POST",
-                    //Jobsheet 7 praktikum 4 bagian 3
-                    "data" : function(d){
-                        d.level_id = $('#level_id').val();
+                    "data": function(d) {
+                        d.barang_id = $('#barang_id').val();
                     }
                 },
                 columns: [{
@@ -68,17 +68,27 @@
                     orderable: false,
                     searchable: false
                 }, {
-                    data: "username",
+                    data: "kategori.kategori_nama",
                     className: "",
                     orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: true // searchable: true, jika ingin kolom ini bisa dicari
                 }, {
-                    data: "nama",
+                    data: "barang_kode",
                     className: "",
                     orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: true // searchable: true, jika ingin kolom ini bisa dicari
                 }, {
-                    data: "level.level_nama",
+                    data: "barang_nama",
+                    className: "",
+                    orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
+                    searchable: false // searchable: true, jika ingin kolom ini bisa dicari
+                }, {
+                    data: "harga_beli",
+                    className: "",
+                    orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
+                    searchable: false // searchable: true, jika ingin kolom ini bisa dicari
+                }, {
+                    data: "harga_jual",
                     className: "",
                     orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: false // searchable: true, jika ingin kolom ini bisa dicari
@@ -89,10 +99,10 @@
                     searchable: false // searchable: true, jika ingin kolom ini bisa dicari
                 }]
             });
-            //jobsheet 7 praktikum 4 bagian 4
-            $('#level_id').on('change',function(){
-                dataUser.ajax.reload();
+            $('#barang_id').on('change', function() {
+                dataBarang.ajax.reload();
             });
+
         });
     </script>
 @endpush

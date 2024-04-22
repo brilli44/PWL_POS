@@ -1,12 +1,11 @@
-
 @extends('layouts.template')
 
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
-            <h3 class="card-title">{{ $page->title }}</h3>
+            <h3 class="card-title">Data Level Pengguna</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create') }}">Tambah</a>
+                <a class="btn btn-sm btn-primary mt-1" href="{{ url('level/create') }}">Tambah</a>
             </div>
         </div>
         <div class="card-body">
@@ -23,22 +22,21 @@
                         <div class="col-3">
                             <select class="form-control" id="level_id" name="level_id" required>
                                 <option value="">- Semua -</option>
-                                @foreach ($kategori as $item)
-                                    <option value="{{ $item->kategori_id }}">{{ $item->kategori_id }}</option>
+                                @foreach ($level as $item)
+                                    <option value="{{ $item->id }}">{{ $item->level_nama }}</option>
                                 @endforeach
                             </select>
-                            <small class="form-text text-muted">Kategori Barang</small>
+                            <small class="form-text text-muted">Level Pengguna</small>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_user">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_level">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Username</th>
-                        <th>Nama</th>
-                        <th>Level Pengguna</th>
+                        <th>Level Kode</th>
+                        <th>Level Nama</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -47,49 +45,45 @@
     </div>
 @endsection
 @push('css')
+    
 @endpush
+
 @push('js')
     <script>
         $(document).ready(function() {
-            var dataUser = $('#table_user').DataTable({
-                serverSide: true, // serverSide: true, jika ingin menggunakan server side processing
+            var dataUser = $('#table_level').DataTable({
+                serverSide: true,
                 ajax: {
-                    "url": "{{ url('user/list') }}",
+                    "url": "{{ url('level/list') }}",
                     "dataType": "json",
                     "type": "POST",
-                    //Jobsheet 7 praktikum 4 bagian 3
                     "data" : function(d){
                         d.level_id = $('#level_id').val();
                     }
                 },
                 columns: [{
-                    data: "DT_RowIndex", // nomor urut dari laravel datatable addIndexColumn()
+                    data: "DT_RowIndex",
                     className: "text-center",
                     orderable: false,
                     searchable: false
                 }, {
-                    data: "username",
+                    data: "level_kode",
                     className: "",
-                    orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
-                    searchable: true // searchable: true, jika ingin kolom ini bisa dicari
+                    orderable: true,
+                    searchable: true
                 }, {
-                    data: "nama",
+                    data: "level_nama",
                     className: "",
-                    orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
-                    searchable: true // searchable: true, jika ingin kolom ini bisa dicari
-                }, {
-                    data: "level.level_nama",
-                    className: "",
-                    orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
-                    searchable: false // searchable: true, jika ingin kolom ini bisa dicari
+                    orderable: true,
+                    searchable: true
                 }, {
                     data: "aksi",
                     className: "",
-                    orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
-                    searchable: false // searchable: true, jika ingin kolom ini bisa dicari
+                    orderable: false,
+                    searchable: false
                 }]
             });
-            //jobsheet 7 praktikum 4 bagian 4
+
             $('#level_id').on('change',function(){
                 dataUser.ajax.reload();
             });
