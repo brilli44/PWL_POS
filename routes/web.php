@@ -118,6 +118,6 @@ Route::group(['middleware' => ['auth']], function (){
         Route:: resource('admin', AdminController::class);
     });
     Route::group(['middleware' =>['cek_login:2']], function () {
-        Route:: resource('admin', ManagerController::class);
+        Route:: resource('manager', ManagerController::class);
     });
 });
