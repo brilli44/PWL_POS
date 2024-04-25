@@ -72,8 +72,10 @@ class AuthController extends Controller
     }
 
     // aksi form register
+ 
     public function proses_register(Request $request)
     {
+        // dd($request->all());
         // kita buat validasi untuk proses register
         // validasinya yaitu semua field wajib di isi
         // validasi username harus unique atau tidak boleh duplicate username nya
