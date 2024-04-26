@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\KategoriModel;
 use Monolog\Level;
+use App\Http\Controllers\PenjualanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,6 +102,40 @@ Route::group(['prefix' => 'kategori'], function () {
         Route::put('/{id}', [KategoriController::class, 'update']);                   // menyimpan perubahan data user
         Route::delete('/{id}', [KategoriController::class, 'destroy']);               //menghapus data user
         });
+
+Route::group(['prefix' => 'barang'], function(){
+            Route::get('/', [BarangController::class, 'index']);            // menampilkan halaman awal level
+            Route::post('/list', [BarangController::class, 'list']);        // menampilkan data level dalam bentuk json untuk datatables
+            Route::get('/create', [BarangController::class, 'create']);     // menampilkan halaman form tambah level
+            Route::post('/', [BarangController::class, 'store']);           // menyimpan data level baru
+            Route::get('/{id}', [BarangController::class, 'show']);         // menampilkan detail level
+            Route::get('/{id}/edit', [BarangController::class, 'edit']);    // menampilkan halaman form edit level
+            Route::put('/{id}', [BarangController::class, 'update']);       // menyimpan perubahan data level
+            Route::delete('/{id}', [BarangController::class, 'destroy']);   // menghapus data level
+        });
+
+Route::group(['prefix' => 'stok'], function(){
+            Route::get('/', [StokController::class, 'index']);            // menampilkan halaman awal level
+            Route::post('/list', [StokController::class, 'list']);       // menampilkan data level dalam bentuk json untuk datatables
+            Route::get('/create', [StokController::class, 'create']);     // menampilkan halaman form tambah level
+            Route::post('/', [StokController::class, 'store']);           // menyimpan data level baru
+            Route::get('/{id}', [StokController::class, 'show']);         // menampilkan detail level
+            Route::get('/{id}/edit', [StokController::class, 'edit']);    // menampilkan halaman form edit level
+            Route::put('/{id}', [StokController::class, 'update']);       // menyimpan perubahan data level
+            Route::delete('/{id}', [StokController::class, 'destroy']);   // menghapus data level
+        });
+
+Route::group(['prefix' => 'penjualan'], function(){
+            Route::get('/', [PenjualanController::class, 'index']);            // menampilkan halaman awal level
+            Route::post('/list', [PenjualanController::class, 'list']);        // menampilkan data level dalam bentuk json untuk datatables
+            Route::get('/create', [PenjualanController::class, 'create']);     // menampilkan halaman form tambah level
+            Route::post('/', [PenjualanController::class, 'store']);           // menyimpan data level baru
+            Route::get('/{id}', [PenjualanController::class, 'show']);         // menampilkan detail level
+            Route::get('/{id}/edit', [PenjualanController::class, 'edit']);    // menampilkan halaman form edit level
+            Route::put('/{id}', [PenjualanController::class, 'update']);       // menyimpan perubahan data level
+            Route::delete('/{id}', [PenjualanController::class, 'destroy']);   // menghapus data level
+        });
+
 // Jobsheet 9
  Route::get('login',[AuthController::class, 'index'])->name('login');
  Route::get('register', [AuthController::class, 'register'])->name('register');

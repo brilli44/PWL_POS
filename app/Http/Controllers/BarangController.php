@@ -26,8 +26,7 @@ class BarangController extends Controller
     // Ambil data user dalam bentuk json untuk datatables
     public function list(Request $request) {
     $barang = BarangModel::select('barang_id', 'kategori_id', 'nama', 'barang_kode','barang_nama','harga_beli',
-    'harga_jual' )
-    ->with('kategori');
+    'harga_jual' )->with('kategori');
     
     
     if ($request->barang_id){
