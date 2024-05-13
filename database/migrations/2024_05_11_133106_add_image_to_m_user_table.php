@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('useri', function (Blueprint $table) {
-            $table->unsignedBigInteger('level_id')->index;
-            $table->foreign('level_id')->references('level_id')->on('m_level');
+        Schema::table('m_users', function (Blueprint $table) {
+            $table->string('image')->nullable();
         });
     }
 
@@ -22,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('useri', function (Blueprint $table) {
-            $table->dropColumn('level_id');
+        Schema::table('m_users', function (Blueprint $table) {
+            $table->dropColumn('image');
         });
     }
 };
