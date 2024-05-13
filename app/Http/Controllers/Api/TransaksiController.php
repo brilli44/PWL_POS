@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\BarangModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Penjualan;
 use Illuminate\Support\Facades\Validator;
 
-class BarangController extends Controller
+class TransaksiController extends Controller
 {
     public function index()
     {
-        $barang = BarangModel::all();
+        $transaksi = Penjualan::all();
 
         return response()->json([
-            'barang' => $barang
+            'transaksi' => $transaksi
         ],200);
     }
 
     public function store(Request $request)
     {
         $validator = validator($request->all(), [
-            'kategori_id' => 'required',
-            'barang_kode' => 'required',
-            'barang_nama' => 'required',
-            'harga_beli' => 'required',
-            'harga_jual' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'penjualan_id' => 'required',
+            'user_id' => 'required',
+            'pembeli' => 'required',
+            'penjualan_kode' => 'required',
+            'penjualan_tanggal' => 'required',
+            
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -35,20 +35,20 @@ class BarangController extends Controller
         }
 
         try {
-            // Create barang
-            $barang = BarangModel::create([
-                'kategori_id' => $request->kategori_id,
-                'barang_kode' => $request->barang_kode,
-                'barang_nama' => $request->barang_nama,
-                'harga_beli' => $request->harga_beli,
-                'harga_jual' => $request->harga_jual,
-                'image' => $request->image->hashName(),
+            
+            $transaksi = Penjualan::create([
+                'penjualan_id' => $request->penjualan_id,
+                'user_id' => $request->user_id,
+                'pembeli' => $request->pembeli,
+                'penjualan_kode' => $request->penjualan_kode,
+                'penjualan_tanggal' => $request->penjualan_tanggal,
+                
             ]);
 
             // Return Json Response
             return response()->json([
                 'success' => true,
-                'barang' => $barang,
+                'transaksi' => $transaksi,
             ], 200);
 
         } catch (\Exception $e) {
@@ -61,25 +61,24 @@ class BarangController extends Controller
 
     public function show($id)
     {
-        $barang = BarangModel::find($id);
-        if ($barang) {
-            return response()->json($barang, 200);
+        $transaksi = Penjualan::find($id);
+        if ($transaksi) {
+            return response()->json($transaksi, 200);
         } else {
-            return response()->json(['message' => 'Barang tidak ditemukan'], 404);
+            return response()->json(['message' => 'transaksi tidak ditemukan'], 404);
         }
     }
-
 
     public function update(Request $request, $id)
     {
         // Validate request data
         $validator = validator($request->all(), [
-            'kategori_id' => 'required',
-            'barang_kode' => 'required',
-            'barang_nama' => 'required',
-            'harga_beli' => 'required',
-            'harga_jual' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'penjualan_id' => 'required',
+            'user_id' => 'required',
+            'pembeli' => 'required',
+            'penjualan_kode' => 'required',
+            'penjualan_tanggal' => 'required',
+        
         ]);
 
         // Check if validation fails
@@ -90,28 +89,27 @@ class BarangController extends Controller
         }
 
         try {
-            // Find barang
-            $barang = BarangModel::find($id);
-            if (!$barang) {
+          
+            $transaksi = Penjualan::find($id);
+            if (!$transaksi) {
                 return response()->json([
-                    'message' => 'Barang tidak ditemukan'
+                    'message' => 'transaksi tidak ditemukan'
                 ], 404);
             }
 
-            $barang->kategori_id = $request->kategori_id;
-            $barang->barang_kode = $request->barang_kode;
-            $barang->barang_nama = $request->barang_nama;
-            $barang->harga_beli = $request->harga_beli;
-            $barang->harga_jual = $request->harga_jual;
-            $barang->image = $request->image->hashName();
-
-            // Update barang
-            $barang->save();
+            $transaksi->penjualan_id = $request->penjualan_id;
+            $transaksi->user_id = $request->user_id;
+            $transaksi->pembeli= $request->pembeli;
+            $transaksi->penjualan_kode = $request->penjualan_kode;
+            $transaksi->penjualan_tanggal = $request->penjualan_tanggal;
+           
+            
+            $transaksi->save();
 
             // Return Json Response
             return response()->json([
                 'success' => true,
-                'barang' => $barang,
+                'transaksi' => $transaksi,
             ], 200);
         } catch (\Exception $e) {
             // Return Json Response
@@ -120,20 +118,19 @@ class BarangController extends Controller
             ], 500);
         }
     }
-    
     public function destroy($id)
     {
         try {
             // Detail
-            $barang = BarangModel::find($id);
-            if (!$barang) {
+            $transaksi = Penjualan::find($id);
+            if (!$transaksi) {
                 return response()->json([
-                    'message' => 'Barang tidak ditemukan'
+                    'message' => 'transaksi tidak ditemukan'
                 ], 404);
             }
 
             // Delete barang
-            $barang->delete();
+            $transaksi->delete();
 
             // Return Json Response
             return response()->json([
@@ -147,6 +144,4 @@ class BarangController extends Controller
             ], 500);
         }
     }
-
-
 }

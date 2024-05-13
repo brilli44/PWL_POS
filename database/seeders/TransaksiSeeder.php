@@ -1,15 +1,15 @@
 <?php
 
 namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class PenjualanSeeder extends Seeder
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+
+class TransaksiSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+   
     public function run(): void
     {
         $data = [
@@ -255,6 +255,8 @@ class PenjualanSeeder extends Seeder
             ],
         ];
 
-        DB::table('t_penjualan_details')->insert($data);
+        DB::table('t_penjualans')->insert($data);
     }
 }
+
+
